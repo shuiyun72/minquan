@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "Create",
   data() {
     return {
       form: {
@@ -58,7 +58,6 @@ export default {
       console.log(res)
       this.parsePictureFile(res)
     });
-    
   },  
   watch:{
     form:{
@@ -213,6 +212,7 @@ export default {
         price: "",
         count: ""
       };
+      this.pictureList = [];
     },
     //上传
     submitForm(){
@@ -221,7 +221,29 @@ export default {
       this.pictureList.map(res=>{
         newPictureList.push(res.base64)
       })
-      console.log(newPictureList)
+
+      var formData = this.form;
+      console.log(this.form)
+      formData.imgurl = JSON.stringify(newPictureList);
+      let this_ = this;
+      this.$axios({
+            url: '/createuser.php',
+            method: 'post',
+            responseType: 'json', // 默认的
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            data: this.qs.stringify(formData)
+        }).then(function (res) {
+            console.log(res)
+            if(res.data.length > 20){
+              alert("上传成功");
+              this_.reset();
+            }else{
+              alert("上传失败，稍后再试");
+            }
+        }).catch(function (error) {
+            console.log(error);
+            alert("网络错误，请稍后再试");
+        })
     }
   }
 };
