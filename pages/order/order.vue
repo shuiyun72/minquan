@@ -1,189 +1,105 @@
 <template>
-	<view class="order">
-		<uni-nav-bar color="#333333" background-color="#ffffff" :status-bar="true"  :title="barTitle" left-icon="arrowleft"
-		 @clickLeft="back" />
+	<view>
 		<view class="tab_list_sy">
 			<view class="item" v-for="(item,index) in tabList" :class="{'active':index == tabSel}" @click="selectTab(item,index)">{{item.text}}</view>
 		</view>
-		<view class="order_list">
-			<view class="order_box" v-for="parent in orderList" @click="toDetail(parent)">
-				<view class="title_c">
-					<view class="left" v-if="parent.status == 0">
-						已取消
+		<view class="home_body">
+			<view class="order_item_sy" v-for="orderItem in orderList">
+				<view class="o_title">
+					<view class="time_l blue" v-if="orderItem.status == 0">
+						待配货
 					</view>
-					<view class="left or" v-if="parent.status == 1">
-						等待支付
+					<view class="time_l blue" v-if="orderItem.status == 1">
+						配送中
 					</view>
-					<view class="left blue" v-if="parent.status == 2">
-						审核中
+					<view class="time_l green" v-if="orderItem.status == 2">
+						平台配送中
 					</view>
-					<view class="left blue2" v-if="parent.status == 3">
-						发货中
-					</view>
-					<view class="left" v-if="parent.status == 4">
-						待评价
-					</view>
-					<view class="left" v-if="parent.status == 5">
+					<view class="time_l" v-if="orderItem.status == 3">
 						已完成
 					</view>
-					
-					<view class="right">
-						{{parent.ftime}}
+					<view class="time_2">
+						{{orderItem.createtime}}
 					</view>
 				</view>
-				<view class="o_item" v-for="item in parent.goods">
-					<view class="left">
-						<image :src="httpp + item.logo" class="img_c" mode=""></image>
-						<view class="title shengluehao">
-							{{item.name}}
-						</view>
+				<view class="code_text">
+					送件码 : <text class="blue">{{orderItem.code}}</text> 
+				</view>
+				<view class="o_it" v-for="item in orderItem.goods">
+					<view class="content">
+						{{item.name}}
 					</view>
-					<view class="right">
+					<view class="num">
 						x{{item.number}}
 					</view>
 				</view>
-				<view class="last_money">
-					<view class="left">
-						...
+				<view class="code_text">
+					订单编号 : {{orderItem.out_trade_no}}
+				</view>
+				<view class="code_text">
+					用户留言 : {{orderItem.remark}}
+				</view>
+				
+				<view class="" v-if="orderItem.state == 3">
+					<view class="code_text">
+						送达中心时间 : {{orderItem.code}}
 					</view>
-					<view class="right">
-						<view class="sm">
-							共{{parent.total_num}}件 实付 :
-						</view>
-						<view class="money">
-							<text class="red">{{parent.total_fee}}</text> 元
-						</view>
+					<view class="code_text">
+						配送完成时间 : {{orderItem.code}}
 					</view>
 				</view>
-				<view class="btn_box" v-if="parent.status == '1'">
-					<view class="btn blue_n sm round" @click.stop="toNav('quxiao',parent)">
-						取消订单
+				<view class="order_num_info">
+					共2件 预计货款 : <text class="money">{{orderItem.total_fee}} 元</text>
+				</view>
+				<view class="btn_box">
+					<view class="btn blue sm round" @click.stop="toNav('peisong',orderItem)" v-if="orderItem.status == 0">
+						配送完成
 					</view>
-					<view class="btn blue sm round" @click.stop="toNav('quzhifu',parent)">
-						去支付
+					<view class="btn blue sm round" @click.stop="toNav('songda',orderItem)" v-if="orderItem.status == 1">
+						已送达中心
 					</view>
 				</view>
-				<view class="btn_box" v-if="parent.status == '2'">
-					<view class="btn blue sm round" @click.stop="toNav('zailai',parent)">
-						再来一单
-					</view>
-				</view>
-				<view class="btn_box" v-if="parent.status == '3'">
-					<view class="btn blue_n sm round" @click.stop="toNav('kefu')">
-						联系客服
-					</view>
-					<view class="btn blue sm round" @click.stop="toNav('zailai',parent)">
-						再来一单
-					</view>
-				</view>
-				<view class="btn_box" v-if="parent.status == '4'">
-					<view class="btn blue_n sm round" @click.stop="toNav('zailai',parent)">
-						再来一单
-					</view>
-					<view class="btn blue sm round" @click.stop="toNav('pingjia',parent)">
-						去评价
-					</view>
-				</view>
-				<view class="btn_box" v-if="parent.status == '5'">
-					<view class="btn blue sm round" @click.stop="toNav('zailai',parent)">
-						再来一单
-					</view>
-				</view>
+				
 			</view>
 		</view>
+
 	</view>
 </template>
 
 <script>
-	import _ from "../../until/lodash";
 	export default {
 		data() {
 			return {
-				barTitle:"订单",
-				orderList:[],
-				tabSel: 1,
 				tabList: [{
-						text: "全部",
-						type: 0
-					}, {
-						text: "待付款",
+						text: "待配货",
 						type: 1
 					}, {
-						text: "待收货",
+						text: "配送中",
 						type: 2
 					},
 					{
-						text: "待评价",
+						text: "已完成",
 						type: 3
+					}, {
+						text: "全部",
+						type: 0
 					}
 				],
+				tabSel: 0,
+				orderList: [],
 				page:1
 			};
-		},
-		computed:{
-			httpp(){
-				return this.$store.state.httpp
-			}
-		},
-		onLoad(ph) {
-			this.tabSel = ph.ins;
-			
-			this.selectTab("",ph.ins)
 		},
 		onReachBottom() { //上拉触底函数
 			console.log("more")
 			++this.page;
 			this.selectTab("",this.tabSel,true)
 		},
+		onShow() {
+			this.page = 1;
+			this.selectTab("",this.tabSel)
+		},
 		methods: {
-			back(){
-				uni.switchTab({
-					url:"../home/home"
-				})
-			},
-			toNav(el,item){
-				if(el == 'quzhifu'){
-					uni.navigateTo({
-						url:'./orderPay?fromType=订单支付&outTradeNo='+item.out_trade_no+'&totalFee='+item.total_fee
-					})
-				}
-				if(el == 'zailai'){
-					uni.navigateTo({
-						url:'./orderTrue?fromType=再来一单&outTradeNo='+item.out_trade_no+'&totalFee='+item.total_fee
-					})
-				}
-				if(el == 'pingjia'){
-					uni.navigateTo({
-						url:'./pingjia?fromType=评价商品&outTradeNo='+item.out_trade_no+'&totalFee='+item.total_fee
-					})
-				}
-				if(el == 'quxiao'){
-					let this_ = this;
-					uni.showModal({
-						title: '取消订单',
-						content: '是否确认取消订单',
-						confirmColor:"#18B357",
-						success: function (res) {
-							if (res.confirm) {
-								this_.$getApi("/api/Order/cancel", {out_trade_no:item.out_trade_no}, res => {
-									this_.$msg('订单取消成功')
-									this_.selectTab("",this_.tabSel)
-								})
-							} else if (res.cancel) {
-								console.log('用户点击取消');
-							}
-						}
-					});
-					
-				}
-				
-				
-			},
-			toDetail(items){
-				uni.navigateTo({
-					url:"./orderDetail?noCode="+items.out_trade_no
-				})
-			},
 			selectTab(el, index,isMore) {
 				this.tabSel = index;
 				if(!isMore){
@@ -191,19 +107,20 @@
 				}
 				
 				let canType = ""
+				
 				if(index == 0 ){
-					canType = "all"
+					canType = "waitship"
 				}
 				if(index == 1 ){
-					canType = "waitpay"
+					canType = "shiping"
 				}
 				if(index == 2 ){
-					canType = "waitreceive"
+					canType = "complete"
 				}
 				if(index == 3 ){
-					canType = "waitcomment"
+					canType = "all"
 				}
-				this.$getApi("/api/Order/list", {type:canType,page:this.page}, res => {
+				this.$getApi("/api/Merchant/orderList", {type:canType,page:this.page}, res => {
 					console.log(res.data, "商品列表")
 					
 					if(isMore){
@@ -214,90 +131,65 @@
 				})
 				
 			},
+			getOrder(state){
+				console.log(state)
+			},
+			toNav(el,item){
+				let this_ = this;
+				if(el=="peisong"){
+					uni.showModal({
+						title:"确认配送完成",
+						content:"是否确认配送完成",
+						success(res) {
+							if(res.confirm == true){
+								this_.$getApi("/api/Merchant/orderStep", {out_trade_no:item.out_trade_no}, res => {
+									// console.log(res.data, "商品列表")
+									this_.$msg("配送完成")
+									this_.selectTab("",this_.tabSel)
+								})
+							}else{
+								console.log("down")
+							}
+						}
+					})
+				}
+				if(el=="songda"){
+					uni.showModal({
+						title:"确认送达中心",
+						content:"是否确认送达中心",
+						success(res) {
+							if(res.confirm == true){
+								this_.$getApi("/api/Merchant/orderStep", {out_trade_no:item.out_trade_no}, res => {
+									// console.log(res.data, "商品列表")
+									this_.$msg("已送达中心")
+									this_.selectTab("",this_.tabSel)
+								})
+							}else{
+								console.log("down")
+							}
+						}
+					})
+				}
+			}
 		}
 	}
 </script>
-
-<style lang="scss" scoped>
-	page {
+<style>
+	page{
 		background-color: #f0f0f0;
 	}
-	.order_list{
-		padding: 0upx 26upx 20upx;
-		.order_box{
-			background-color: #fff;
-			padding: 20upx;
-			border-radius: 16upx;
-			margin-bottom: 20upx;
-			.title_c{
-				display: flex;
-				justify-content: space-between;
-				align-items: baseline;
-				.left{
-					font-weight: bold;
-					font-size: 32upx;
-					color: #666;
-					&.or{
-						color: $uni-or;
-					}
-					&.blue2{
-						color: #72C9CB;
-					}
-				}
-				.right{
-					color: #999;
-					font-size: 28upx;
-				}
-			}
-			.o_item{
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				padding: 16upx 0;
-				.left{
-					display: inline-flex;
-					align-items: center;
-					.img_c{
-						width: 80upx;
-						height: 80upx;
-					}
-					.title{
-						margin-left: 20upx;
-						width: 520upx;
-						color: #333;
-					}
-				}
-			}
-			.last_money{
-				display: flex;
-				justify-content: space-between;
-				.left{
-					color: #999;
-				}
-				.right{
-					display: inline-flex;
-					.sm{
-						color: #999;
-						transform: scale(.8);
-						position: relative;
-						top:4upx;
-					}
-				}
-			}
-			.btn_box{
-				display: flex;
-				justify-content: flex-end;
-				padding: 20upx 0 0;
-				.btn{
-					padding: 10upx 0;
-					width: 160upx;
-					text-align: center;
-					margin-left: 20upx;
-					&+.btn{
-						
-					}
-				}
-			}
+</style>
+<style lang="scss" scoped>
+	.btn_box{
+		display: flex;
+		justify-content: flex-end;
+		padding: 20upx 0 0;
+		.btn{
+			padding: 10upx 0;
+			width: 160upx;
+			text-align: center;
+			margin-left: 20upx;
+			
 		}
 	}
 	.tab_list_sy {
@@ -305,9 +197,9 @@
 		font-size: 32upx;
 		justify-content: space-around;
 		background-color: #fff;
-		margin-bottom: 26upx;
 		border-top: 2upx solid #eee;
 		color: #999;
+
 		.item {
 			border-bottom: 6upx solid transparent;
 			padding: 20upx 0 16upx;
@@ -315,6 +207,112 @@
 			&.active {
 				color: $uni-bl;
 				border-bottom: 6upx solid $uni-bl;
+			}
+		}
+	}
+
+	.home_body {
+		height: calc(100vh - 320upx);
+		overflow-y: auto;
+		padding: 20upx 26upx;
+		background-color: #f0f0f0;
+	}
+	.order_num_info{
+		text-align: right;
+		padding: 16upx 0;
+		font-size: 26upx;
+		color: #666;
+		.money{
+			font-size: 30upx;
+			margin-left: 10upx;
+		}
+	}
+	.order_item_sy {
+		padding: 26upx;
+		font-size: 30upx;
+		color: #666;
+		margin-bottom: 20upx;
+		background-color: #fff;
+		border-radius: 20upx;
+
+		&.pop {
+			width: 640upx;
+		}
+		
+		.o_title {
+			display: flex;
+			justify-content: space-between;
+			border-bottom: 1upx solid #f0f0f0;
+			padding-bottom: 10upx;
+			margin-bottom: 10upx;
+
+			.time_l {
+				color: #333;
+				&.blue{
+					color:$uni-bl;
+				}
+				&.green{
+					color:$uni-color-success;
+				}
+			}
+			.time_2{
+				color: #666;
+				font-size: 28upx;
+			}
+		}
+
+		.o_it {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 10upx 0;
+
+			.content {
+				min-width: 500upx;
+			}
+
+			.num {
+				width: 60upx;
+				text-align: right;
+				flex-shrink: 0;
+			}
+
+			.iconfont {
+				font-size: 42upx;
+				width: 50upx;
+				flex-shrink: 0;
+				margin-left: 20upx;
+			}
+
+			.iconyduizhengqueshixin {
+				color: #0f0;
+			}
+		}
+
+		.code_text {
+			padding: 10upx 0;
+			color: #999;
+			.blue{
+				color: $uni-red;
+				margin-left: 20upx;
+			}
+			// border-bottom: 1upx solid #f0f0f0;
+		}
+
+		.btn_grow {
+			display: flex;
+			justify-content: flex-end;
+			padding-top: 20upx;
+
+			.btn {
+				border: 1upx solid #999;
+				background-color: #999;
+				color: #fff;
+
+				&.blue {
+					background-color: #007AFF;
+					border: 1upx solid #007AFF;
+				}
 			}
 		}
 	}

@@ -14,6 +14,8 @@ Vue.prototype.$getApi = function(url, data, callsuc, token,err) {
 	let userInfo = uni.getStorageSync('userInfo');
 	if (token && userInfo) {
 		data.token = userInfo.token;
+		// data.page = 1;
+		// data.paginate = 200;
 	}
 	// console.log("data", data)
 	// uni.showLoading({
@@ -33,13 +35,6 @@ Vue.prototype.$getApi = function(url, data, callsuc, token,err) {
 				callsuc instanceof Function && callsuc(res.data)
 			} else
 			if (res.data.code == 0) {
-				if(res.data.msg == "余额不足"){
-					setTimeout(()=>{
-						uni.switchTab({
-							url:"/pages/mine/mine"
-						})
-					},1000)
-				}
 				this.$msg(res.data.msg)
 				return false
 			} else

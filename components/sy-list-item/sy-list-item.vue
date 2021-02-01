@@ -207,7 +207,15 @@ export default {
 			return parent;
 		},
 		onClick() {
-			this.$emit('click')
+			if (this.to !== '') {
+				this.openPage();
+				return;
+			}
+			if (this.clickable || this.link) {
+				this.$emit('click', {
+					data: {}
+				});
+			}
 		},
 		onSwitchChange(e) {
 			this.$emit('switchChange', e.detail);
@@ -332,7 +340,6 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	overflow: hidden;
 	font-weight: bold;
 	flex-shrink: 0;
-	white-space:nowrap;
 	.uni-red-cc{
 		color: #f00;
 	}

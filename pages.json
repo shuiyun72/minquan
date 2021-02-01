@@ -1,129 +1,88 @@
 {
-	"pages": [{
-			"path": "pages/home/home",
-			"style": {
+	"pages": [
+		{
+		    "path" : "pages/login/login",
+		    "style" :                                                                                    
+		    {
 				"navigationStyle": "custom",
-				"navigationBarTitleText": "民权生鲜",
-				"enablePullDownRefresh": true,
-				"app-plus": {
-					"titleNView": false
-				}
-			}
-		},
-		{
-			"path": "pages/login/login",
-			"style": {
-				"navigationBarTitleText": "登录"
-			}
-		},{
-			"path": "pages/login/yinsi",
-			"style": {
-				"navigationBarTitleText": "用户隐私"
-			}
-		}, {
-			"path": "pages/home/search",
-			"style": {
-				"navigationBarTitleText": "搜索",
-				"enablePullDownRefresh": false
-			}
-
-		},
-		{
-			"path": "pages/classify/classify",
-			"style": {
-				"navigationBarTitleText": "分类",
-				"enablePullDownRefresh": false
-			}
-
-		},
-		{
-			"path": "pages/shopCar/shopCar",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "购物车",
+				"navigationBarTitleText": "民权生鲜商户端",
 				"enablePullDownRefresh": false,
+				"onReachBottonDistance":150,
 				"app-plus": {
 					"titleNView": false
 				}
-			}
-
+		    }
+		    
 		},
 		{
-			"path": "pages/mine/mine",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "我的",
-				"enablePullDownRefresh": false,
-				"app-plus": {
-					"titleNView": false
-				}
-			}
-
-		}, {
-			"path": "pages/home/searchResult",
-			"style": {
-				"navigationBarTitleText": "搜索结果",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/detail/detail",
-			"style": {
-				"navigationBarTitleText": "商品详情",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/detail/allRate",
-			"style": {
-				"navigationBarTitleText": "所有评价",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/classify/shopClassify",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "店铺",
-				"enablePullDownRefresh": false,
-				"app-plus": {
-					"titleNView": false
-				}
-			}
-
-		}
-	    ,{
-            "path" : "pages/order/orderTrue",
+		    "path" : "pages/home/home",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "首页",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+            "path" : "pages/shopAdmin/shopAdmin",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "确认订单",
+                "navigationBarTitleText": "商品管理",
                 "enablePullDownRefresh": false
             }
             
         }
         ,{
-            "path" : "pages/mine/address",
+            "path" : "pages/order/order",
             "style" :                                                                                    
             {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "地址选择",
-				"enablePullDownRefresh": false,
-				"app-plus": {
-					"titleNView": false
-				}
+                "navigationBarTitleText": "订单",
+                "enablePullDownRefresh": false
             }
             
         }
         ,{
-            "path" : "pages/mine/addAddress",
+            "path" : "pages/money/money",
             "style" :                                                                                    
             {
-                "navigationStyle": "custom",
-                "navigationBarTitleText": "新增地址",
-                "enablePullDownRefresh": false,
-                "app-plus": {
-                	"titleNView": false
-                }
+                "navigationBarTitleText": "钱包管理",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/shopStore/shopStore",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "店铺管理",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/set/set",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设置",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/shopAdmin/addFoot",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "添加商品",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/money/tixian",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "申请提现",
+                "enablePullDownRefresh": false
             }
             
         }
@@ -137,56 +96,16 @@
             
         }
         ,{
-            "path" : "pages/order/order",
+            "path" : "pages/set/editPhone",
             "style" :                                                                                    
             {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "订单",
-				"enablePullDownRefresh": false,
-				"app-plus": {
-					"titleNView": false
-				}
-            }
-            
-        }
-        ,{
-            "path" : "pages/order/orderPay",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "确认支付",
+                "navigationBarTitleText": "修改密码",
                 "enablePullDownRefresh": false
             }
             
         }
         ,{
-            "path" : "pages/mine/xiaoxi",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "消息",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/xiaoxiDetail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "消息详情",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/set",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "设置",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/yijianfankui",
+            "path" : "pages/set/yijian",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "意见反馈",
@@ -195,16 +114,7 @@
             
         }
         ,{
-            "path" : "pages/mine/setEditPhone",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "修改手机号",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/setXieyi",
+            "path" : "pages/set/xieyi",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "用户协议",
@@ -212,146 +122,34 @@
             }
             
         }
-        ,{
-            "path" : "pages/mine/yuE",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "余额",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/shopAdd",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "入驻",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/order/eweima",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "微信支付",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/hezuo",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "商务合作",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/aboutMe",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "关于我们",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/home/searchShop",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "搜索店铺",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/home/allShop",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "全部店铺",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/order/orderDetail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "订单详情",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/order/pingjia",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "评价商品",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/myPingjia",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "我的评价",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/login/loginIn",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "注册",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mine/setMine",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "设置信息",
-                "enablePullDownRefresh": false
-            }
-            
-        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "民权生鲜",
+		"navigationBarTitleText": "民权生鲜商户端",
 		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#FFFFFF"
-	},
-	"tabBar": {
-		"color": "#999999",
-		"selectedColor": "#31C5AF",
-		"borderStyle": "black",
-		"backgroundColor": "#ffffff",
-		"list": [{
-			"pagePath": "pages/home/home",
-			"iconPath": "static/img/bar/shouyh.png",
-			"selectedIconPath": "static/img/bar/shouyl.png",
-			"text": "首页"
-		}, {
-			"pagePath": "pages/classify/classify",
-			"iconPath": "static/img/bar/flhs.png",
-			"selectedIconPath": "static/img/bar/fltc.png",
-			"text": "分类"
-		}, {
-			"pagePath": "pages/shopCar/shopCar",
-			"iconPath": "static/img/bar/gouwcxx.png",
-			"selectedIconPath": "static/img/bar/gouwctc.png",
-			"text": "购物车"
-		}, {
-			"pagePath": "pages/mine/mine",
-			"iconPath": "static/img/bar/wdhs.png",
-			"selectedIconPath": "static/img/bar/wodtc.png",
-			"text": "我的"
-		}]
 	}
+	// ,
+	// "tabBar": {
+	// 	"color": "#999999",
+	// 	"selectedColor": "#007AFF",
+	// 	"borderStyle": "black",
+	// 	"backgroundColor": "#ffffff",
+	// 	"list": [{
+	// 		"pagePath": "pages/home/home",
+	// 		"iconPath": "static/img/qiangdh.png",
+	// 		"selectedIconPath": "static/img/qiangdl.png",
+	// 		"text": "抢单"
+	// 	}, {
+	// 		"pagePath": "pages/order/order",
+	// 		"iconPath": "static/img/dingdh.png",
+	// 		"selectedIconPath": "static/img/dingdl.png",
+	// 		"text": "订单管理"
+	// 	}, {
+	// 		"pagePath": "pages/mine/mine",
+	// 		"iconPath": "static/img/wodh.png",
+	// 		"selectedIconPath": "static/img/wodl.png",
+	// 		"text": "我的"
+	// 	}]
+	// }
 }
