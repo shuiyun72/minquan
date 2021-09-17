@@ -4,7 +4,10 @@
 			<view class="item" v-for="(item,index) in tabList" :class="{'active':index == tabSel}" @click="selectTab(item,index)">{{item.text}}</view>
 		</view>
 		<view class="home_body">
-			<view class="order_item_sy" v-for="orderItem in orderList">
+			<view class="no_list" v-if="orderList.length == 0">
+				列表为空
+			</view>
+			<view class="order_item_sy" v-for="orderItem in orderList" v-if="orderList.length > 0">
 				<view class="o_title">
 					<view class="time_l blue" v-if="orderItem.status == 0">
 						待配货

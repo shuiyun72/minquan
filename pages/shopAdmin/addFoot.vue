@@ -218,14 +218,15 @@
 				}
 			},
 			upImg(el) {
+				console.log(el)
 				let this_ = this;
 				uni.chooseImage({
 					count: 1,
-					sizeType: ['copressed'],
+					sizeType: ['compressed'],
 					success(res) {
 						//因为有一张图片， 输出下标[0]， 直接输出地址
 						var imgFiles = res.tempFilePaths[0]
-						if(!imgFiles)
+						console.log(res)
 						uni.uploadFile({
 							url: this_.httpp+'/api/Common/upload', //仅为示例，非真实的接口地址
 							filePath: imgFiles,

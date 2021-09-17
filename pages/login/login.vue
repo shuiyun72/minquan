@@ -44,7 +44,7 @@
 				this.$getApi('/api/Merchant/login',data,res=>{
 					console.log(res.data)
 					this.$store.commit('login',res.data)
-					uni.navigateTo({
+					uni.redirectTo({
 						url:"../home/home"
 					})
 				},"false")

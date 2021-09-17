@@ -910,4 +910,10 @@ page{
 	border-radius: 30upx;
 	display: inline-flex;
 }
+.no_list{
+	font-size: 40upx;
+	color: #999;
+	text-align: center;
+	padding-top: 160rpx;
+}
 </style>

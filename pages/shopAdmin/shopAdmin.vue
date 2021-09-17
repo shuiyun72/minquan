@@ -4,7 +4,10 @@
 			<view class="item" v-for="(item,index) in tabList" :class="{'active':index == tabSel}" @click="selectTab(index)">{{item.text}}</view>
 		</view>
 		<view class="foot_list">
-			<view class="foot_item" v-for="item in footList">
+			<view class="no_list" v-if="footList.length == 0">
+				列表为空
+			</view>
+			<view class="foot_item" v-for="item in footList" v-if="footList.length > 0">
 				<image :src="httpp + item.logo" class="foot_img" mode=""></image>
 				<view class="info">
 					<view class="title1">

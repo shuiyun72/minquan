@@ -322,7 +322,7 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 	display: flex;
 	/* #endif */
 	padding-right: 8px;
-	min-width: 50px;
+	flex-shrink: 0;
 	color: #3b4144;
 	// overflow: hidden;
 	flex-direction: column;

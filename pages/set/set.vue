@@ -13,6 +13,7 @@
 				</view>
 			</template>
 		</sy-list-item>
+		
 	</uni-list>
 	<view class="sub_btn_all mt100" @click="loginOut">
 		退出登录
