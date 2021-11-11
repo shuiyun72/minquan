@@ -109,5 +109,14 @@
         "setting" : {
             "urlCheck" : true
         }
+    },
+    "h5" : {
+        "publicPath" : "./",
+        "devServer" : {
+            "https" : false
+        },
+        "router" : {
+            "base" : "./"
+        }
     }
 }
